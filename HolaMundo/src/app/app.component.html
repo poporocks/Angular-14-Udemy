@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <div class="row">
+    <h3>Listado de estudiantes</h3>
+    <button class="btn btn-primary ms-auto" (click)="toogle()">Toogle</button>
+  </div>
+  <br>
+  <table class="table" *ngIf="mostrar">
+    <thead>
+      <th>Nro</th>
+      <th>Nombre</th>
+      <th>Estado</th>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let estudiante of listEstudiantes; let i = index" [ngSwitch]="estudiante.estado">
+        <td>{{i + 1}}</td>
+        <td>{{estudiante.nombre}}</td>
+        <!-- <td [ngStyle]="{'font-style': estudiante.estado === 'Promocionado' ? 'italic' : 'normal'}">{{estudiante.estado}}</td> -->
+        <td>
+          <!-- <span [ngClass]="estudiante.estado === 'Promocionado' ? 'badge bg-success' : 'badge bg-secondary'">
+            {{estudiante.estado}}
+          </span> -->
+          <span *ngSwitchCase="'Promocionado'" class="badge bg-success">
+            {{estudiante.estado}}
+          </span>
+          <span *ngSwitchCase="'Regular'" class="badge bg-secondary">
+            {{estudiante.estado}}
+          </span>
+          <span *ngSwitchCase="'Gata'" class="badge bg-danger">
+            {{estudiante.estado}}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 *ngIf="listEstudiantes.length === 0">No hay registros para mostrar</h3>
+</div>
