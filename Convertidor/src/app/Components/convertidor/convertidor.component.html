@@ -3,7 +3,8 @@
         <div class="col-lg-12">
             <div class="mb-3">
                 <label for="cantidad" class="form-label">Ingrese cantidad</label>
-                <input type="number" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Ingrese Cantidad">
+                <input type="number" class="form-control form-control-lg"  [(ngModel)]="cantidad"
+                    id="exampleFormControlInput1" placeholder="Ingrese Cantidad" (input)="convertir()">
             </div>
         </div>
     </div>
@@ -11,27 +12,25 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="tengo">Tengo</label>
-                <select class="form-control form-control-lg" id="tengo">
-                    <option>USD</option>
-                    <option>EUR</option>
-                    <option>LIB</option>
+                <select class="form-control form-control-lg" [(ngModel)]="tengo" 
+                    id="tengo" (change)="convertir()">
+                    <option *ngFor="let moneda of monedas">{{moneda}}</option>
                 </select>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="quiero">Quiero</label>
-                <select class="form-select form-control-lg" id="quiero">
-                    <option>USD</option>
-                    <option>EUR</option>
-                    <option>LIB</option>
+                <select class="form-control form-control-lg" [(ngModel)]="quiero" 
+                    id="quiero" (change)="convertir()">
+                    <option *ngFor="let moneda of monedas">{{moneda}}</option>
                 </select>
             </div>
         </div>
     </div>
-    <h5 class="text-center mt-3">
-        <span class="badge bg-success">1000 USD</span>
+    <h5 *ngIf="cantidad > 0" class="text-center mt-3">
+        <span class="badge bg-success">{{cantidad}} {{tengo}}</span>
         <span class="badge bg-secondary">son</span>
-        <span class="badge bg-success">800 EUR</span>
+        <span class="badge bg-success">{{total | number: '0.2'}} {{quiero}}</span>
     </h5>
 </div>
