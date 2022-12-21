@@ -1,0 +1,34 @@
+body {
+    background-color: #0A0E21;
+}
+
+.titulo {
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.row {
+    margin-top: 20px;
+}
+
+.btn-color {
+    background-color: #FF3366;
+    border-color: #FF3366;
+    border-radius: 25px;
+    width: 100%;
+}
+
+.btn-color:hover {
+    background-color: #FF3366;
+    border-color: #FF3366;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
