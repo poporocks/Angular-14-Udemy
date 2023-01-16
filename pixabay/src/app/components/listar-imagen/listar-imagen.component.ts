@@ -21,8 +21,16 @@ export class ListarImagenComponent {
   }
 
   obtenerImagenes() {
-    this._imagenService.getImagenes(this.termino).subscribe(date => {
+    this._imagenService.getImagenes(this.termino).subscribe(data => {
       console.log(DataTransfer);
+
+      if(data.hits.lenght === 0) {
+        this._imagenService.setError('No encontramos ningún resultado.');
+        return;
+      }
+    }, error => {
+      this._imagenService.setError('Ocurrió un inconveniente al realizar la búsqueda.');
+        return;
     });
   }
 }
