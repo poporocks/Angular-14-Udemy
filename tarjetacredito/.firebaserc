@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tarjetacredito-e9c56": {
+      "hosting": {
+        "tarjetacredito": [
+          "tarjetacredito-e9c56"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tarjetacredito-e9c56"
+  }
+}
