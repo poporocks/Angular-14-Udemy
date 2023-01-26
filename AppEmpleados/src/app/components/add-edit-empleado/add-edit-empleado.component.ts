@@ -18,8 +18,8 @@ import { EmpleadoService } from '../../services/empleado.service';
 export class AddEditEmpleadoComponent {
   estadosCiviles: any[];
   myForm: FormGroup;
-  idEmpleado: Number;
-  accion: String;
+  idEmpleado: number;
+  accion: string;
 
   constructor(private fb: FormBuilder, private _empleadoService: EmpleadoService,
               private route: Router, public snackBar: MatSnackBar, private aRoute: ActivatedRoute) {
@@ -43,7 +43,10 @@ export class AddEditEmpleadoComponent {
   }
 
   ngOnInit(): void {
-    
+    if(this.idEmpleado !== undefined) {
+      this.accion = 'Editar';
+      this.getEmpleado();
+    }
   }
 
   guardarEmpleado() {
@@ -57,14 +60,35 @@ export class AddEditEmpleadoComponent {
       sexo: this.myForm.get("sexo")!.value,
     };
 
-    this._empleadoService.guardarEmpleado(empleado);
+    var mensaje = 'Empleado guardado con éxito.';
+
+    if (this.idEmpleado !== undefined) {
+      this._empleadoService.editEmpleado(empleado, this.idEmpleado);
+      mensaje = 'Empleado editado con éxito.';
+    } else {
+      this._empleadoService.guardarEmpleado(empleado);
+    }
+
     this.route.navigate(['/']);
-    this.snackBar.open('Empleado guardado con éxito.', 'X', {
+    this.snackBar.open(mensaje, 'X', {
       duration: 3000
     });
   }
 
   fValidaciones(propiedad: string, validador: string): boolean {
     return this.myForm.get(propiedad)!.hasError(validador) && this.myForm.get(propiedad)!.touched ? true : false;
+  }
+
+  getEmpleado() {
+    const empleado = this._empleadoService.getEmpleado(this.idEmpleado);
+    console.log(empleado);
+    this.myForm.patchValue({
+      nombreCompleto: empleado.nombreCompleto,
+      correo: empleado.correo,
+      fechaIngreso: empleado.fechaIngreso,
+      telefono: empleado.telefono,
+      estadoCivil: empleado.estadoCivil,
+      sexo: empleado.sexo,
+    })
   }
 }

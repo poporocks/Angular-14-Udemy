@@ -29,4 +29,17 @@ export class EmpleadoService {
   guardarEmpleado(empleado: Empleado) {
     this.listEmpleado.unshift(empleado);
   }
+
+  getEmpleado(index: number): Empleado {
+    return this.listEmpleado[index];
+  }
+
+  editEmpleado(empleado: Empleado, index: number) {
+    this.listEmpleado[index].nombreCompleto = empleado.nombreCompleto;
+    this.listEmpleado[index].correo = empleado.correo;
+    this.listEmpleado[index].fechaIngreso = empleado.fechaIngreso;
+    this.listEmpleado[index].telefono = empleado.telefono;
+    this.listEmpleado[index].estadoCivil = empleado.estadoCivil;
+    this.listEmpleado[index].sexo = empleado.sexo;
+  }
 }
